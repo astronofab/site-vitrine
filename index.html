@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FSMDB — Nos opérations</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* Palette reprise telle quelle de NEXUS·IA (voir app/static/css/style.css)
+       pour que le site vitrine ait la même identité graphique que le logiciel. */
+    :root {
+      --nexus-navy-950: #0f1a30;
+      --nexus-navy-900: #16233f;
+      --nexus-bg: #f5f6f9;
+      --nexus-bg-card: #ffffff;
+      --nexus-text: #1c2433;
+      --nexus-text-soft: #5b6472;
+      --nexus-text-on-navy: #eef1f8;
+      --nexus-text-on-navy-soft: #a9b4cc;
+      --nexus-gold: #c9a227;
+      --nexus-gold-deep: #a9821c;
+      --nexus-green: #cdeedd;
+      --nexus-green-text: #1c6b47;
+      --nexus-orange: #fbe6c2;
+      --nexus-orange-text: #8a5a12;
+      --nexus-blue: #d8e4fb;
+      --nexus-blue-text: #2c4f8f;
+      --nexus-radius-m: 14px;
+      --nexus-shadow-soft: 0 2px 8px rgba(15, 26, 48, 0.06);
+      --font-display: "Fraunces", "Georgia", serif;
+      --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { min-height: 100%; }
+    body {
+      font-family: var(--font-body); margin: 0; color: var(--nexus-text); min-height: 100vh;
+      /* Photo sur tout le fond d'écran (demande explicite du 23/08/2026,
+         remplace l'ancienne bannière étroite) — fixe pour rester visible
+         au défilement, même traitement d'assombrissement que l'écran de
+         connexion de NEXUS·IA (cohérence complète logiciel/site). */
+      background: linear-gradient(180deg, rgba(15, 26, 48, 0.72) 0%, rgba(15, 26, 48, 0.85) 100%), url("fond-entete.jpg") center/cover no-repeat fixed;
+    }
+    h1, h2 { font-family: var(--font-display); }
+    .conteneur { max-width: 1100px; margin: 0 auto; padding: 0 20px 40px; }
+    header.entete { text-align: center; padding: 56px 16px 40px; }
+    header.entete h1 { margin: 0; font-size: 46px; font-weight: 600; color: #fff; letter-spacing: 0.01em; }
+    header.entete p { margin: 8px 0 0; color: var(--nexus-text-on-navy-soft); font-size: 15px; }
+    .mise-en-page { display: flex; gap: 24px; align-items: flex-start; }
+    .colonne-operations { flex: 1; min-width: 0; }
+    .colonne-contact { width: 300px; flex-shrink: 0; position: sticky; top: 20px; }
+    @media (max-width: 760px) {
+      .mise-en-page { flex-direction: column; }
+      .colonne-contact { width: 100%; position: static; }
+    }
+    .categorie { margin-bottom: 30px; }
+    .titre-categorie { display: flex; align-items: center; gap: 10px; margin: 0 0 12px; font-size: 16px; font-weight: 600; color: #fff; }
+    .titre-categorie .statut { font-size: 12px; }
+    .tuiles-colonne { display: flex; flex-direction: column; gap: 10px; }
+    .tuile {
+      background: var(--nexus-bg-card); border-radius: var(--nexus-radius-m); box-shadow: var(--nexus-shadow-soft);
+      padding: 14px 20px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+    }
+    .tuile-photo { width: 84px; height: 64px; object-fit: cover; border-radius: 8px; flex-shrink: 0; }
+    .tuile-corps { flex: 1; min-width: 180px; }
+    .tuile-corps h3 { margin: 0 0 3px; font-size: 15.5px; font-weight: 600; font-family: var(--font-body); }
+    .tuile-details { color: var(--nexus-text-soft); font-size: 13px; }
+    .tuile-prix { font-weight: 600; font-size: 15px; white-space: nowrap; }
+    .statut { display: inline-block; padding: 3px 11px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+    .statut.en_acquisition { background: var(--nexus-blue); color: var(--nexus-blue-text); }
+    .statut.en_travaux { background: var(--nexus-orange); color: var(--nexus-orange-text); }
+    .statut.en_vente { background: var(--nexus-green); color: var(--nexus-green-text); }
+    .statut.vendu { background: #ece3c8; color: var(--nexus-gold-deep); }
+    .vide { color: var(--nexus-text-on-navy-soft); }
+    .carte-contact { background: var(--nexus-bg-card); border-radius: var(--nexus-radius-m); box-shadow: var(--nexus-shadow-soft); padding: 26px 22px; text-align: center; }
+    .carte-contact h2 { margin: 0 0 8px; font-size: 18px; font-weight: 600; }
+    .carte-contact p { color: var(--nexus-text-soft); font-size: 13.5px; margin: 4px 0; }
+    .bouton-contact { display: inline-block; margin-top: 14px; padding: 12px 24px; background: var(--nexus-gold); color: var(--nexus-navy-950); text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 14.5px; }
+    .bouton-contact:hover { background: var(--nexus-gold-deep); }
+    .avertissement-demarchage { max-width: 1100px; margin: 10px auto 0; padding: 16px 20px; background: var(--nexus-orange); border-radius: var(--nexus-radius-m); font-size: 13.5px; color: var(--nexus-orange-text); text-align: center; line-height: 1.5; }
+    footer { text-align: center; font-size: 12px; color: var(--nexus-text-on-navy-soft); padding: 24px 16px; }
+    footer a { color: var(--nexus-text-on-navy-soft); }
+  </style>
+</head>
+<body>
+  <div class="conteneur">
+    <header class="entete">
+      <h1>FSMDB</h1>
+      <p>Marchand de biens · Vente directe de professionnels à particulier</p>
+    </header>
+
+    <div class="mise-en-page">
+      <main class="colonne-operations">
+        <div id="liste"><p class="vide">Chargement…</p></div>
+      </main>
+
+      <aside class="colonne-contact">
+        <div class="carte-contact">
+          <h2>Une opération vous intéresse ?</h2>
+          <p>📧 fsmdb22@gmail.com</p>
+          <p>📞 07 69 31 72 09 - 06 46 63 46 41</p>
+          <a class="bouton-contact" href="mailto:fsmdb22@gmail.com?subject=Intérêt%20pour%20une%20opération%20FSMDB&body=Bonjour%2C%0A%0AJe%20suis%20intéressé(e)%20par%20l'une%20de%20vos%20opérations.%0A%0ACordialement%2C">
+            ✉️ Nous contacter
+          </a>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script>
+    // Classement chronologique par catégorie, dans cet ordre précis
+    // (demande explicite) — même principe que les colonnes Acquisition /
+    // Travaux / Commercialisation / Terminées de NEXUS·IA.
+    const CATEGORIES = [
+      { cle: "en_acquisition", titre: "En cours" },
+      { cle: "en_travaux", titre: "Bientôt en vente" },
+      { cle: "en_vente", titre: "En vente" },
+      { cle: "vendu", titre: "Déjà vendu" },
+    ];
+
+    function rendreTuile(op) {
+      return `
+        <div class="tuile">
+          ${op.photos && op.photos.length ? `<img class="tuile-photo" src="${op.photos[0]}" alt="Photo du bien">` : ""}
+          <div class="tuile-corps">
+            <h3>${op.titre ?? "Opération"}</h3>
+            <div class="tuile-details">
+              ${op.ville ?? ""} ${op.code_postal ?? ""} ${op.quartier ? "· " + op.quartier : ""}
+              ${op.typologie ? "· " + op.typologie : ""} ${op.surface_habitable ? "· " + op.surface_habitable + " m²" : ""}
+            </div>
+          </div>
+          ${op.prix_vente_affiche ? `<div class="tuile-prix">${op.prix_vente_affiche.toLocaleString("fr-FR")} €</div>` : ""}
+        </div>`;
+    }
+
+    fetch("operations.json?" + Date.now())
+      .then(r => r.json())
+      .then(operations => {
+        const conteneur = document.getElementById("liste");
+        if (!operations.length) {
+          conteneur.innerHTML = '<p class="vide">Aucune opération publiée pour le moment.</p>';
+          return;
+        }
+        conteneur.innerHTML = CATEGORIES
+          .map(cat => ({ ...cat, operations: operations.filter(op => op.statut_public === cat.cle) }))
+          .filter(cat => cat.operations.length > 0)
+          .map(cat => `
+            <section class="categorie">
+              <div class="titre-categorie">${cat.titre} <span class="statut ${cat.cle}">${cat.operations.length}</span></div>
+              <div class="tuiles-colonne">${cat.operations.map(rendreTuile).join("")}</div>
+            </section>
+          `).join("");
+      })
+      .catch(() => {
+        document.getElementById("liste").innerHTML = '<p class="vide">Impossible de charger les opérations.</p>';
+      });
+  </script>
+
+  <div class="avertissement-demarchage">
+    ⚠️ <strong>Nous ne travaillons avec aucune agence immobilière.</strong><br>
+    Nous vendons exclusivement de particulier à particulier. Merci de vous abstenir de tout démarchage commercial (téléphonique, mail ou courrier) pour proposer un mandat de vente sur nos biens — ces sollicitations ne seront pas suivies d'effet.
+  </div>
+
+  <footer>
+    <a href="mentions-legales.html">Mentions légales</a> · <a href="confidentialite.html">Politique de confidentialité</a>
+  </footer>
+</body>
+</html>
