@@ -4,8 +4,28 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FSMDB — Nos opérations</title>
+  <meta name="description" content="Marchand de biens immobiliers à Tours — vente directe de professionnels à particuliers, appartements et maisons.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- AJOUTÉ le 25/08/2026 — demande explicite (amélioration SEO) :
+       données structurées Organization, rempli avec les mêmes jetons
+       {{...}} que le reste de la page (voir regenerer_pages_site_web_depuis_gabarits). -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "RealEstateAgent",
+    "name": "FS MDB",
+    "email": "fsmdb22@gmail.com",
+    "telephone": "07 69 31 72 09 - 06 46 63 46 41",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "4 rue Manet",
+      "postalCode": "37300",
+      "addressLocality": "Joués-les-Tours",
+      "addressCountry": "FR"
+    }
+  }
+  </script>
   <style>
     /* Palette reprise telle quelle de NEXUS·IA (voir app/static/css/style.css)
        pour que le site vitrine ait la même identité graphique que le logiciel. */
@@ -60,7 +80,9 @@
     .tuile {
       background: var(--nexus-bg-card); border-radius: var(--nexus-radius-m); box-shadow: var(--nexus-shadow-soft);
       padding: 14px 20px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+      cursor: pointer; transition: box-shadow 0.15s ease;
     }
+    .tuile:hover { box-shadow: 0 4px 14px rgba(15, 26, 48, 0.12); }
     .tuile-photo { width: 84px; height: 64px; object-fit: cover; border-radius: 8px; flex-shrink: 0; }
     .tuile-corps { flex: 1; min-width: 180px; }
     .tuile-corps h3 { margin: 0 0 3px; font-size: 15.5px; font-weight: 600; font-family: var(--font-body); }
@@ -85,10 +107,8 @@
 <body>
   <div class="conteneur">
     <header class="entete">
-      <h1>FS MDB</h1>
-      <p>Marchand de biens immobiliers à Tours - 
-        Vente directe de professionnels à particuliers
-      ( appartements et maisons )</p>
+      <h1>FSMDB</h1>
+      <p>Marchand de biens immobiliers à Tours<br>Vente directe de professionnels à particuliers<br>(appartements et maisons)</p>
     </header>
 
     <div class="mise-en-page">
@@ -121,18 +141,20 @@
     ];
 
     function rendreTuile(op) {
+      // MODIFIÉ le 25/08/2026 — demande explicite (amélioration SEO) :
+      // chaque tuile est désormais un vrai lien vers la page dédiée du
+      // bien (biens/{slug}/), générée par le serveur avec plus d'infos,
+      // plus de photos, ses propres balises title/meta et schema.org.
+      const lien = op.slug ? `biens/${op.slug}/` : "#";
       return `
-        <div class="tuile">
+        <a class="tuile" href="${lien}" style="text-decoration:none;color:inherit;">
           ${op.photos && op.photos.length ? `<img class="tuile-photo" src="${op.photos[0]}" alt="Photo du bien">` : ""}
           <div class="tuile-corps">
             <h3>${op.titre ?? "Opération"}</h3>
-            <div class="tuile-details">
-              ${op.ville ?? ""} ${op.code_postal ?? ""} ${op.quartier ? "· " + op.quartier : ""}
-              ${op.typologie ? "· " + op.typologie : ""} ${op.surface_habitable ? "· " + op.surface_habitable + " m²" : ""}
-            </div>
+            <div class="tuile-details">${op.ville ?? ""} ${op.code_postal ?? ""}</div>
           </div>
           ${op.prix_vente_affiche ? `<div class="tuile-prix">${op.prix_vente_affiche.toLocaleString("fr-FR")} €</div>` : ""}
-        </div>`;
+        </a>`;
     }
 
     fetch("operations.json?" + Date.now())
@@ -147,7 +169,7 @@
           .map(cat => ({ ...cat, operations: operations.filter(op => op.statut_public === cat.cle) }))
           .filter(cat => cat.operations.length > 0)
           .map(cat => `
-            <section class="categorie">
+            <section class="categorie" id="categorie-${cat.cle}">
               <div class="titre-categorie">${cat.titre} <span class="statut ${cat.cle}">${cat.operations.length}</span></div>
               <div class="tuiles-colonne">${cat.operations.map(rendreTuile).join("")}</div>
             </section>
