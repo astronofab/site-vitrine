@@ -1,7 +1,9 @@
 [
   {
     "reference": "TEMP-2",
-    "titre": "T1-26 m²-1 Rue de la Petite Péraudière-Rénovation complète",
+    "titre": "T1 · 26 m² · Rue de la Petite Péraudière",
+    "slug": "t1-temp-2",
+    "description_meta": "T1 · 26 m² — Marchand de biens à Tours, vente directe de particulier à particulier.",
     "ville": null,
     "code_postal": "37540",
     "quartier": null,
@@ -19,7 +21,9 @@
   },
   {
     "reference": "TEMP-3",
-    "titre": "T2-29 m²-1 Rue de la Petite Péraudière-Rénovation complète",
+    "titre": "T2 · 29 m² · Rue de la Petite Péraudière",
+    "slug": "t2-temp-3",
+    "description_meta": "T2 · 29 m² — Marchand de biens à Tours, vente directe de particulier à particulier.",
     "ville": null,
     "code_postal": "37540",
     "quartier": null,
@@ -37,7 +41,9 @@
   },
   {
     "reference": "NEX-2026-0002",
-    "titre": "T2-37 m²-181, rue de l'Ermitage-Création de surface (combles, extension)",
+    "titre": "T2 · 37 m² · rue de l'Ermitage",
+    "slug": "t2-nex-2026-0002",
+    "description_meta": "T2 · 37 m² — Marchand de biens à Tours, vente directe de particulier à particulier.",
     "ville": null,
     "code_postal": "37000",
     "quartier": null,
