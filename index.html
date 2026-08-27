@@ -165,13 +165,19 @@
           conteneur.innerHTML = '<p class="vide">Aucune opération publiée pour le moment.</p>';
           return;
         }
+        // MODIFIÉ le 26/08/2026 — demande explicite : "j'aimerais qu'il
+        // soit affiché les autres catégories même s'il n'y a pas de bien
+        // encore dedans" — le filtre .filter(cat => cat.operations.length
+        // > 0) masquait entièrement une catégorie vide, alors que les 4
+        // catégories (En cours / Bientôt en vente / En vente / Déjà
+        // vendu) doivent toujours apparaître dans le menu, avec un
+        // message dédié si elle est vide pour l'instant.
         conteneur.innerHTML = CATEGORIES
           .map(cat => ({ ...cat, operations: operations.filter(op => op.statut_public === cat.cle) }))
-          .filter(cat => cat.operations.length > 0)
           .map(cat => `
             <section class="categorie" id="categorie-${cat.cle}">
               <div class="titre-categorie">${cat.titre} <span class="statut ${cat.cle}">${cat.operations.length}</span></div>
-              <div class="tuiles-colonne">${cat.operations.map(rendreTuile).join("")}</div>
+              <div class="tuiles-colonne">${cat.operations.length ? cat.operations.map(rendreTuile).join("") : '<p class="vide">Aucun bien dans cette catégorie pour le moment.</p>'}</div>
             </section>
           `).join("");
       })
