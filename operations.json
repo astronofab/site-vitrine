@@ -12,7 +12,7 @@
     "etage": 2,
     "dpe": "D",
     "annee_construction": 1870,
-    "description_travaux_realises": null,
+    "description_travaux_realises": "Vendu en l'état sans travaux",
     "chauffage": "Individuel gaz",
     "charges_copro_annuelles": 650.0,
     "hauteur_immeuble_etages": 3,
@@ -23,7 +23,7 @@
     "balcon": false,
     "plain_pied": false,
     "statut_public": "vendu",
-    "prix_vente_affiche": 139000.0,
+    "prix_vente_affiche": 129000.0,
     "photos": [
       "https://fsmdb.fr/biens/t3-tours-nex-2026-0001/photos/1.jpg"
     ]
