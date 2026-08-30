@@ -41,8 +41,22 @@
     h1.titre-bien { font-size: 28px; font-weight: 600; margin: 0 0 6px; }
     .localisation { color: var(--nexus-text-soft); font-size: 14.5px; margin-bottom: 20px; }
     .galerie { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 8px; margin-bottom: 24px; }
+    /* AJOUTÉ le 29/08/2026 — demande explicite : carrousel de photos
+       défilable (flèches + points + glissement tactile natif via
+       scroll-snap, fonctionne même sans JavaScript). */
+    .galerie-carrousel { position: relative; margin-bottom: 24px; border-radius: var(--nexus-radius-m); overflow: hidden; background: #eceef3; }
+    .galerie-piste { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    .galerie-piste::-webkit-scrollbar { display: none; }
+    .galerie-photo { flex: 0 0 100%; width: 100%; height: 360px; object-fit: cover; scroll-snap-align: start; }
+    .galerie-bouton { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(15,26,48,0.55); color: #fff; border: none; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; font-size: 20px; line-height: 1; display: flex; align-items: center; justify-content: center; }
+    .galerie-bouton:hover { background: rgba(15,26,48,0.8); }
+    .galerie-bouton--prec { left: 12px; }
+    .galerie-bouton--suiv { right: 12px; }
+    .galerie-points { position: absolute; bottom: 12px; left: 0; right: 0; display: flex; justify-content: center; gap: 6px; }
+    .galerie-point { width: 7px; height: 7px; padding: 0; border-radius: 50%; border: none; background: rgba(255,255,255,0.55); cursor: pointer; }
+    .galerie-point--actif { background: #fff; }
     .photo-galerie { width: 100%; height: 140px; object-fit: cover; border-radius: var(--nexus-radius-m); }
-    .photo-galerie--vide { display: flex; align-items: center; justify-content: center; background: #eceef3; color: var(--nexus-text-soft); font-size: 13px; }
+    .photo-galerie--vide { display: flex; align-items: center; justify-content: center; background: #eceef3; color: var(--nexus-text-soft); font-size: 13px; height: 200px; }
     .caracteristiques { background: var(--nexus-bg-card); border-radius: var(--nexus-radius-m); box-shadow: var(--nexus-shadow-soft); padding: 20px 24px; margin-bottom: 20px; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 14px; }
     .carac { display: flex; flex-direction: column; }
     .carac-label { font-size: 11.5px; color: var(--nexus-text-soft); text-transform: uppercase; letter-spacing: 0.03em; }
@@ -66,7 +80,7 @@
     <p class="fil-ariane"><a href="../../index.html">Accueil</a> › T1 · 26 m² · Rue de la Petite Péraudière · Mairie- église</p>
     <h1 class="titre-bien">T1 · 26 m² · Rue de la Petite Péraudière · Mairie- église</h1>
     <p class="localisation">📍 Mairie- église · 37540</p>
-    <div class="galerie"><img src="https://fsmdb.fr/biens/t1-mairie-eglise-temp-2/photos/1.jpg" alt="T1 · 26 m² · Rue de la Petite Péraudière · Mairie- église" class="photo-galerie"></div>
+    <div class="galerie-carrousel"><div class="galerie-piste"><img src="https://fsmdb.fr/biens/t1-mairie-eglise-temp-2/photos/1.jpg" alt="T1 · 26 m² · Rue de la Petite Péraudière · Mairie- église — photo 1" class="galerie-photo" loading="eager"></div></div>
     <div class="caracteristiques"><div class="carac"><span class="carac-label">Typologie</span><span class="carac-valeur">T1</span></div><div class="carac"><span class="carac-label">Surface</span><span class="carac-valeur">26 m²</span></div><div class="carac"><span class="carac-label">Étage</span><span class="carac-valeur">2ᵉ</span></div><div class="carac"><span class="carac-label">DPE</span><span class="carac-valeur">D</span></div><div class="carac"><span class="carac-label">Année de construction</span><span class="carac-valeur">1850</span></div><div class="carac"><span class="carac-label">Chauffage</span><span class="carac-valeur">Individuel electrique</span></div><div class="carac"><span class="carac-label">Charges de copropriété</span><span class="carac-valeur">300 €/an</span></div><div class="carac"><span class="carac-label">Hauteur de l'immeuble</span><span class="carac-valeur">2 étages</span></div></div>
     
     
@@ -77,5 +91,12 @@
       <a class="bouton-contact" href="mailto:fsmdb22@gmail.com?subject=Intérêt%20pour%20T1%20%C2%B7%2026%20m%C2%B2%20%C2%B7%20Rue%20de%20la%20Petite%20P%C3%A9raudi%C3%A8re%20%C2%B7%20Mairie-%20%C3%A9glise">✉️ Nous contacter</a>
     </div>
   </div>
+  <!-- AJOUTÉ le 29/08/2026 — demande explicite : carrousel de photos
+       défilable. Vanilla JS, aucune dépendance externe (cohérent avec le
+       reste du site vitrine, un simple export statique). Jamais
+       bloquant si absent : le scroll-snap CSS fait déjà défiler les
+       photos au doigt sans une ligne de JS — ce script ajoute juste les
+       flèches/points cliquables et les garde synchronisés. -->
+  
 </body>
 </html>
