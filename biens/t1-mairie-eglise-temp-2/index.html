@@ -47,7 +47,19 @@
     .galerie-carrousel { position: relative; margin-bottom: 24px; border-radius: var(--nexus-radius-m); overflow: hidden; background: #eceef3; }
     .galerie-piste { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
     .galerie-piste::-webkit-scrollbar { display: none; }
-    .galerie-photo { flex: 0 0 100%; width: 100%; height: 360px; object-fit: cover; scroll-snap-align: start; }
+    /* CORRIGÉ le 29/08/2026 — VRAI BUG TROUVÉ ET CONFIRMÉ, signalé
+       explicitement : "elles sont recadrées, ça resserre l'angle de vue,
+       on ne voit quasi rien sur certaines photos comme si elles étaient
+       zoomées". Cause : object-fit: cover force l'image à REMPLIR
+       entièrement le cadre fixe (360px de haut) en recadrant tout ce qui
+       dépasse — une photo dont les proportions ne correspondent pas
+       exactement à ce cadre se retrouvait donc coupée sur les côtés ou en
+       haut/bas, parfois sévèrement (une photo très large ou très haute
+       perdait une bonne partie de son contenu). object-fit: contain
+       affiche toujours la photo ENTIÈRE, quitte à laisser une bande vide
+       de part et d'autre (comblée par le fond gris clair du carrousel,
+       déjà utilisé juste au-dessus) — jamais plus rien de coupé. */
+    .galerie-photo { flex: 0 0 100%; width: 100%; height: 360px; object-fit: contain; background: #eceef3; scroll-snap-align: start; }
     .galerie-bouton { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(15,26,48,0.55); color: #fff; border: none; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; font-size: 20px; line-height: 1; display: flex; align-items: center; justify-content: center; }
     .galerie-bouton:hover { background: rgba(15,26,48,0.8); }
     .galerie-bouton--prec { left: 12px; }
@@ -91,12 +103,21 @@
       <a class="bouton-contact" href="mailto:fsmdb22@gmail.com?subject=Intérêt%20pour%20T1%20%C2%B7%2026%20m%C2%B2%20%C2%B7%20Rue%20de%20la%20Petite%20P%C3%A9raudi%C3%A8re%20%C2%B7%20Mairie-%20%C3%A9glise">✉️ Nous contacter</a>
     </div>
   </div>
-  <!-- AJOUTÉ le 29/08/2026 — demande explicite : carrousel de photos
-       défilable. Vanilla JS, aucune dépendance externe (cohérent avec le
-       reste du site vitrine, un simple export statique). Jamais
-       bloquant si absent : le scroll-snap CSS fait déjà défiler les
-       photos au doigt sans une ligne de JS — ce script ajoute juste les
-       flèches/points cliquables et les garde synchronisés. -->
+  <!-- CORRIGÉ le 29/08/2026 — VRAI BUG TROUVÉ ET CONFIRMÉ, signalé
+       explicitement : "les points blancs pour le défilement des photos
+       n'avancent pas avec les photos". Cause : allerA() mettait à jour
+       "index" AVANT même que le défilement animé (smooth) ne commence
+       — au moment où l'écouteur de scroll calculait enfin le nouvel
+       index réel, il retombait déjà sur la même valeur que celle déjà
+       affectée en avance, et le garde-fou "if (nouvelIndex === index)
+       return" empêchait alors la mise à jour visuelle des points.
+       Concrètement : cliquer sur un point (ou une flèche) déplaçait
+       bien la photo, mais le point actif restait bloqué sur l'ancien.
+       Réécrit avec IntersectionObserver — la source de vérité n'est
+       plus "où ai-je demandé d'aller" mais "quelle photo est VRAIMENT
+       visible à l'écran en ce moment", quelle que soit la façon dont on
+       y est arrivé (clic sur un point, flèche, glissement au doigt,
+       molette) — plus aucune désynchronisation possible par construction. -->
   
 </body>
 </html>
