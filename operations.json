@@ -35,9 +35,9 @@
   {
     "reference": "TEMP-2",
     "titre": "T1 · 26 m² · Rue de la Petite Péraudière · Mairie- église",
-    "slug": "t1-mairie-eglise-temp-2",
-    "description_meta": "T1 · 26 m² — Marchand de biens à Tours, vente directe de particulier à particulier.",
-    "ville": null,
+    "slug": "t1-st-cyr-sur-loire-mairie-eglise-temp-2",
+    "description_meta": "T1 · 26 m² · St Cyr sur loire — Marchand de biens à Tours, vente directe de particulier à particulier.",
+    "ville": "St Cyr sur loire",
     "code_postal": "37540",
     "quartier": "Mairie- église",
     "typologie": "T1",
@@ -45,9 +45,9 @@
     "etage": 2,
     "dpe": "D",
     "annee_construction": 1850,
-    "description_travaux_realises": null,
+    "description_travaux_realises": "Appartement refait à neuf entièrement ( isolation, sols, électricité, cuisine, sdb, peinture, porte palière ...)",
     "chauffage": "Individuel electrique",
-    "charges_copro_annuelles": 300.0,
+    "charges_copro_annuelles": 100.0,
     "hauteur_immeuble_etages": 2,
     "garage": false,
     "parking": false,
@@ -58,15 +58,15 @@
     "statut_public": "en_acquisition",
     "prix_vente_affiche": null,
     "photos": [
-      "https://fsmdb.fr/biens/t1-mairie-eglise-temp-2/photos/1.jpg?v=b280517203"
+      "https://fsmdb.fr/biens/t1-st-cyr-sur-loire-mairie-eglise-temp-2/photos/1.jpg?v=b280517203"
     ]
   },
   {
     "reference": "TEMP-3",
     "titre": "T2 · 29 m² · Rue de la Petite Péraudière · Mairie- église",
-    "slug": "t2-mairie-eglise-temp-3",
-    "description_meta": "T2 · 29 m² — Marchand de biens à Tours, vente directe de particulier à particulier.",
-    "ville": null,
+    "slug": "t2-st-cyr-sur-loire-mairie-eglise-temp-3",
+    "description_meta": "T2 · 29 m² · St Cyr sur loire — Marchand de biens à Tours, vente directe de particulier à particulier.",
+    "ville": "St Cyr sur loire",
     "code_postal": "37540",
     "quartier": "Mairie- église",
     "typologie": "T2",
@@ -74,9 +74,9 @@
     "etage": 1,
     "dpe": "D",
     "annee_construction": 1850,
-    "description_travaux_realises": null,
+    "description_travaux_realises": "Appartement refait à neuf entièrement ( isolation, sols, électricité, cuisine, sdb, chambre, peinture, porte palière ...)",
     "chauffage": "Individuel electrique",
-    "charges_copro_annuelles": 350.0,
+    "charges_copro_annuelles": 170.0,
     "hauteur_immeuble_etages": 2,
     "garage": false,
     "parking": false,
@@ -87,7 +87,7 @@
     "statut_public": "en_acquisition",
     "prix_vente_affiche": null,
     "photos": [
-      "https://fsmdb.fr/biens/t2-mairie-eglise-temp-3/photos/1.jpg?v=8fdb8ecfff"
+      "https://fsmdb.fr/biens/t2-st-cyr-sur-loire-mairie-eglise-temp-3/photos/1.jpg?v=8fdb8ecfff"
     ]
   },
   {
@@ -102,8 +102,8 @@
     "surface_habitable": 37.0,
     "etage": 2,
     "dpe": "D",
-    "annee_construction": 1850,
-    "description_travaux_realises": null,
+    "annee_construction": 1958,
+    "description_travaux_realises": "Aménagement des combles de 17m² carrez, parquet neuf rdc + étage",
     "chauffage": "Individuel electrique",
     "charges_copro_annuelles": 320.0,
     "hauteur_immeuble_etages": 2,
