@@ -114,14 +114,14 @@
     "balcon": false,
     "plain_pied": false,
     "statut_public": "en_travaux",
-    "prix_vente_affiche": 139000.0,
+    "prix_vente_affiche": 130000.0,
     "photos": [
-      "https://fsmdb.fr/biens/t2-nex-2026-0002/photos/1.jpg?v=b6291c0d80",
-      "https://fsmdb.fr/biens/t2-nex-2026-0002/photos/2.jpg?v=707521ec95",
-      "https://fsmdb.fr/biens/t2-nex-2026-0002/photos/3.jpg?v=257ecd82e8",
-      "https://fsmdb.fr/biens/t2-nex-2026-0002/photos/4.jpg?v=a518a1b345",
-      "https://fsmdb.fr/biens/t2-nex-2026-0002/photos/5.jpg?v=9b1fd0103a",
-      "https://fsmdb.fr/biens/t2-nex-2026-0002/photos/6.jpg?v=09a7ec7be8",
+      "https://fsmdb.fr/biens/t2-nex-2026-0002/photos/1.jpg?v=09a7ec7be8",
+      "https://fsmdb.fr/biens/t2-nex-2026-0002/photos/2.jpg?v=b6291c0d80",
+      "https://fsmdb.fr/biens/t2-nex-2026-0002/photos/3.jpg?v=707521ec95",
+      "https://fsmdb.fr/biens/t2-nex-2026-0002/photos/4.jpg?v=257ecd82e8",
+      "https://fsmdb.fr/biens/t2-nex-2026-0002/photos/5.jpg?v=a518a1b345",
+      "https://fsmdb.fr/biens/t2-nex-2026-0002/photos/6.jpg?v=9b1fd0103a",
       "https://fsmdb.fr/biens/t2-nex-2026-0002/photos/7.jpg?v=2b40f28979"
     ]
   }
