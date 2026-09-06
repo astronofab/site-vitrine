@@ -25,11 +25,23 @@
     "statut_public": "vendu",
     "prix_vente_affiche": 129000.0,
     "photos": [
-      "https://fsmdb.fr/biens/t3-tours-nex-2026-0001/photos/1.jpg?v=85988a19ef",
-      "https://fsmdb.fr/biens/t3-tours-nex-2026-0001/photos/2.jpg?v=03394abb6e",
-      "https://fsmdb.fr/biens/t3-tours-nex-2026-0001/photos/3.jpg?v=dc0beda0ba",
-      "https://fsmdb.fr/biens/t3-tours-nex-2026-0001/photos/4.jpg?v=680d54bebf",
-      "https://fsmdb.fr/biens/t3-tours-nex-2026-0001/photos/5.jpg?v=3948cd12a7"
+      "https://fsmdb.fr/biens/t3-tours-nex-2026-0001/photos/1.jpg?v=a6d615b627",
+      "https://fsmdb.fr/biens/t3-tours-nex-2026-0001/photos/2.jpg?v=1243639206",
+      "https://fsmdb.fr/biens/t3-tours-nex-2026-0001/photos/3.jpg?v=8f9e6e9396",
+      "https://fsmdb.fr/biens/t3-tours-nex-2026-0001/photos/4.jpg?v=8a28efa218",
+      "https://fsmdb.fr/biens/t3-tours-nex-2026-0001/photos/5.jpg?v=353e62203f",
+      "https://fsmdb.fr/biens/t3-tours-nex-2026-0001/photos/6.jpg?v=04bf13cba2",
+      "https://fsmdb.fr/biens/t3-tours-nex-2026-0001/photos/7.jpg?v=afac6d7714",
+      "https://fsmdb.fr/biens/t3-tours-nex-2026-0001/photos/8.jpg?v=ea810fcf0f",
+      "https://fsmdb.fr/biens/t3-tours-nex-2026-0001/photos/9.jpg?v=510c6fb869",
+      "https://fsmdb.fr/biens/t3-tours-nex-2026-0001/photos/10.jpg?v=21e7a0bb30",
+      "https://fsmdb.fr/biens/t3-tours-nex-2026-0001/photos/11.jpg?v=ba55af8d8c",
+      "https://fsmdb.fr/biens/t3-tours-nex-2026-0001/photos/12.jpg?v=713b13686d",
+      "https://fsmdb.fr/biens/t3-tours-nex-2026-0001/photos/13.jpg?v=710f6d662e",
+      "https://fsmdb.fr/biens/t3-tours-nex-2026-0001/photos/14.jpg?v=8beb664cd5",
+      "https://fsmdb.fr/biens/t3-tours-nex-2026-0001/photos/15.jpg?v=a29b98a278",
+      "https://fsmdb.fr/biens/t3-tours-nex-2026-0001/photos/16.jpg?v=2e87a9fff1",
+      "https://fsmdb.fr/biens/t3-tours-nex-2026-0001/photos/17.jpg?v=04d4e6c75b"
     ]
   },
   {
@@ -58,7 +70,12 @@
     "statut_public": "en_acquisition",
     "prix_vente_affiche": null,
     "photos": [
-      "https://fsmdb.fr/biens/t1-st-cyr-sur-loire-mairie-eglise-temp-2/photos/1.jpg?v=b280517203"
+      "https://fsmdb.fr/biens/t1-st-cyr-sur-loire-mairie-eglise-temp-2/photos/1.jpg?v=8cbce80c4f",
+      "https://fsmdb.fr/biens/t1-st-cyr-sur-loire-mairie-eglise-temp-2/photos/2.jpg?v=b891bb5009",
+      "https://fsmdb.fr/biens/t1-st-cyr-sur-loire-mairie-eglise-temp-2/photos/3.jpg?v=c13074a824",
+      "https://fsmdb.fr/biens/t1-st-cyr-sur-loire-mairie-eglise-temp-2/photos/4.jpg?v=7a8a0dd680",
+      "https://fsmdb.fr/biens/t1-st-cyr-sur-loire-mairie-eglise-temp-2/photos/5.jpg?v=5cb634bd4b",
+      "https://fsmdb.fr/biens/t1-st-cyr-sur-loire-mairie-eglise-temp-2/photos/6.jpg?v=60937d7703"
     ]
   },
   {
@@ -87,7 +104,12 @@
     "statut_public": "en_acquisition",
     "prix_vente_affiche": null,
     "photos": [
-      "https://fsmdb.fr/biens/t2-st-cyr-sur-loire-mairie-eglise-temp-3/photos/1.jpg?v=8fdb8ecfff"
+      "https://fsmdb.fr/biens/t2-st-cyr-sur-loire-mairie-eglise-temp-3/photos/1.jpg?v=a87f812ef9",
+      "https://fsmdb.fr/biens/t2-st-cyr-sur-loire-mairie-eglise-temp-3/photos/2.jpg?v=da9558e4fc",
+      "https://fsmdb.fr/biens/t2-st-cyr-sur-loire-mairie-eglise-temp-3/photos/3.jpg?v=5cb634bd4b",
+      "https://fsmdb.fr/biens/t2-st-cyr-sur-loire-mairie-eglise-temp-3/photos/4.jpg?v=60937d7703",
+      "https://fsmdb.fr/biens/t2-st-cyr-sur-loire-mairie-eglise-temp-3/photos/5.jpg?v=c13074a824",
+      "https://fsmdb.fr/biens/t2-st-cyr-sur-loire-mairie-eglise-temp-3/photos/6.jpg?v=7a8a0dd680"
     ]
   },
   {
@@ -116,13 +138,15 @@
     "statut_public": "en_travaux",
     "prix_vente_affiche": 130000.0,
     "photos": [
-      "https://fsmdb.fr/biens/t2-nex-2026-0002/photos/1.jpg?v=09a7ec7be8",
-      "https://fsmdb.fr/biens/t2-nex-2026-0002/photos/2.jpg?v=b6291c0d80",
-      "https://fsmdb.fr/biens/t2-nex-2026-0002/photos/3.jpg?v=707521ec95",
-      "https://fsmdb.fr/biens/t2-nex-2026-0002/photos/4.jpg?v=257ecd82e8",
-      "https://fsmdb.fr/biens/t2-nex-2026-0002/photos/5.jpg?v=a518a1b345",
-      "https://fsmdb.fr/biens/t2-nex-2026-0002/photos/6.jpg?v=9b1fd0103a",
-      "https://fsmdb.fr/biens/t2-nex-2026-0002/photos/7.jpg?v=2b40f28979"
+      "https://fsmdb.fr/biens/t2-nex-2026-0002/photos/1.jpg?v=3649286388",
+      "https://fsmdb.fr/biens/t2-nex-2026-0002/photos/2.jpg?v=96058e268f",
+      "https://fsmdb.fr/biens/t2-nex-2026-0002/photos/3.jpg?v=6d756295c7",
+      "https://fsmdb.fr/biens/t2-nex-2026-0002/photos/4.jpg?v=0ac9978b41",
+      "https://fsmdb.fr/biens/t2-nex-2026-0002/photos/5.jpg?v=19e6b7a8e5",
+      "https://fsmdb.fr/biens/t2-nex-2026-0002/photos/6.jpg?v=5140939fbc",
+      "https://fsmdb.fr/biens/t2-nex-2026-0002/photos/7.jpg?v=a88927c003",
+      "https://fsmdb.fr/biens/t2-nex-2026-0002/photos/8.jpg?v=6ce0d7d5d2",
+      "https://fsmdb.fr/biens/t2-nex-2026-0002/photos/9.jpg?v=a7ad487f12"
     ]
   }
 ]
