@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FS MDB — Nos opérations</title>
   <meta name="description" content="Marchand de biens immobiliers à Tours — vente directe de professionnels à particuliers, appartements et maisons.">
+  <!-- AJOUTÉ le 07/09/2026 — VRAI BUG TROUVÉ ET CONFIRMÉ, capture Google
+       Search Console à l'appui : "Page en double sans URL canonique
+       sélectionnée par l'utilisateur" sur http://fsmdb.fr/. Cette page
+       n'avait jamais de balise canonique, contrairement aux pages de
+       biens individuelles qui en ont une depuis le 25/08 — Google ne
+       pouvait donc pas savoir que https://fsmdb.fr/ est la version de
+       référence. Jeton vide (rien n'est écrit) tant que le domaine
+       n'est pas configuré dans Paramètres > Site vitrine. -->
+  <link rel="canonical" href="https://fsmdb.fr/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <!-- AJOUTÉ le 25/08/2026 — demande explicite (amélioration SEO) :
