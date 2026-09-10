@@ -13,7 +13,7 @@
        pouvait donc pas savoir que https://fsmdb.fr/ est la version de
        référence. Jeton vide (rien n'est écrit) tant que le domaine
        n'est pas configuré dans Paramètres > Site vitrine. -->
-  <link rel="canonical" href="https://fsmdb.fr/">
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <!-- AJOUTÉ le 25/08/2026 — demande explicite (amélioration SEO) :
@@ -71,6 +71,32 @@
       background: linear-gradient(180deg, rgba(15, 26, 48, 0.72) 0%, rgba(15, 26, 48, 0.85) 100%), url("fond-entete.jpg") center/cover no-repeat fixed;
     }
     h1, h2 { font-family: var(--font-display); }
+
+    /* AJOUTÉ le 09/09/2026 — demande explicite : "améliore le visuel du
+       site web avec les mêmes couleurs que Nexus, [et] les menus de
+       gauche" — le menu latéral façon NEXUS·IA existait déjà sur la
+       page de CHAQUE bien (voir construire_page_bien_html côté Python)
+       mais pas ici, sur l'accueil : seule page du site sans ce menu,
+       incohérence corrigée. Classes .sidebar/.sidebar__brand/.menu-item
+       etc. VOLONTAIREMENT identiques à celles de construire_page_bien_html
+       (règle d'or n°1 : même apparence, une seule définition de style
+       à l'esprit même si dupliquée par nécessité technique — un gabarit
+       HTML statique ici, du Python là-bas, aucun moyen de partager
+       littéralement le même fichier CSS entre les deux sans un vrai
+       serveur de fichiers CSS partagé, jamais mis en place pour un site
+       aussi simple). Toute page du site a maintenant EXACTEMENT le même
+       menu, qu'on arrive par l'accueil ou par la fiche d'un bien. */
+    .sidebar { width: 258px; flex-shrink: 0; background: var(--nexus-navy-950); color: var(--nexus-text-on-navy); padding: 24px 14px; position: fixed; top: 0; bottom: 0; left: 0; overflow-y: auto; z-index: 10; }
+    .sidebar__brand { font-family: var(--font-display); font-size: 20px; font-weight: 600; margin-bottom: 20px; padding: 0 12px; }
+    .sidebar__label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--nexus-text-on-navy-soft); padding: 0 12px; margin: 18px 0 8px; }
+    .sidebar__label:first-of-type { margin-top: 0; }
+    ul.menu-list { list-style: none; margin: 0; padding: 0; }
+    .menu-item { display: block; padding: 9px 12px; border-radius: 8px; color: var(--nexus-text-on-navy-soft); font-size: 13.8px; font-weight: 500; text-decoration: none; }
+    .menu-item:hover { background: rgba(255,255,255,0.08); color: #fff; }
+    .menu-item-vide { padding: 6px 12px; font-size: 12px; color: var(--nexus-text-on-navy-soft); opacity: 0.7; }
+    .contenu-avec-sidebar { margin-left: 258px; }
+    @media (max-width: 760px) { .sidebar { position: static; width: auto; } .contenu-avec-sidebar { margin-left: 0; } }
+
     .conteneur { max-width: 1100px; margin: 0 auto; padding: 0 20px 40px; }
     header.entete { text-align: center; padding: 56px 16px 40px; }
     header.entete h1 { margin: 0; font-size: 46px; font-weight: 600; color: #fff; letter-spacing: 0.01em; }
@@ -92,7 +118,7 @@
       cursor: pointer; transition: box-shadow 0.15s ease;
     }
     .tuile:hover { box-shadow: 0 4px 14px rgba(15, 26, 48, 0.12); }
-    .tuile-photo { width: 84px; height: 64px; object-fit: cover; border-radius: 8px; flex-shrink: 0; }
+    .tuile-photo { width: 84px; height: 64px; object-fit: cover; border-radius: 8px; flex-shrink: 0; cursor: zoom-in; }
     .tuile-corps { flex: 1; min-width: 180px; }
     .tuile-corps h3 { margin: 0 0 3px; font-size: 15.5px; font-weight: 600; font-family: var(--font-body); }
     .tuile-details { color: var(--nexus-text-soft); font-size: 13px; }
@@ -114,94 +140,219 @@
   </style>
 </head>
 <body>
-  <div class="conteneur">
-    <header class="entete">
-      <h1>FS MDB</h1>
-      <p>Marchand de biens immobiliers à Tours<br>Vente directe de professionnels à particuliers<br>(appartements et maisons)</p>
-    </header>
+  <!-- AJOUTÉ le 09/09/2026 — menu latéral façon NEXUS·IA, rempli en JS
+       une fois operations.json chargé (voir plus bas) — mêmes données
+       et même regroupement par catégorie que la liste principale,
+       même lien "biens/{slug}/" que le menu de la fiche d'un bien. -->
+  <aside class="sidebar" id="menu-sidebar">
+    <div class="sidebar__brand">FS MDB</div>
+    <p class="vide" style="padding:0 12px;font-size:12px;">Chargement…</p>
+  </aside>
 
-    <div class="mise-en-page">
-      <main class="colonne-operations">
-        <div id="liste"><p class="vide">Chargement…</p></div>
-      </main>
+  <div class="contenu-avec-sidebar">
+    <div class="conteneur">
+      <header class="entete">
+        <h1>FS MDB</h1>
+        <p>Marchand de biens immobiliers à Tours<br>Vente directe de professionnels à particuliers<br>(appartements et maisons)</p>
+      </header>
 
-      <aside class="colonne-contact">
-        <div class="carte-contact">
-          <h2>Une opération vous intéresse ?</h2>
-          <p>📧 fsmdb22@gmail.com</p>
-          <p>📞 07 69 31 72 09 - 06 46 63 46 41</p>
-          <a class="bouton-contact" href="mailto:fsmdb22@gmail.com?subject=Intérêt%20pour%20une%20opération%20FS MDB&body=Bonjour%2C%0A%0AJe%20suis%20intéressé(e)%20par%20l'une%20de%20vos%20opérations.%0A%0ACordialement%2C">
-            ✉️ Nous contacter
-          </a>
-        </div>
-      </aside>
-    </div>
-  </div>
+      <div class="mise-en-page">
+        <main class="colonne-operations">
+          <div id="liste"><p class="vide">Chargement…</p></div>
+        </main>
 
-  <script>
-    // Classement chronologique par catégorie, dans cet ordre précis
-    // (demande explicite) — même principe que les colonnes Acquisition /
-    // Travaux / Commercialisation / Terminées de NEXUS·IA.
-    const CATEGORIES = [
-      { cle: "en_acquisition", titre: "En cours" },
-      { cle: "en_travaux", titre: "Bientôt en vente" },
-      { cle: "en_vente", titre: "En vente" },
-      { cle: "vendu", titre: "Déjà vendu" },
-    ];
-
-    function rendreTuile(op) {
-      // MODIFIÉ le 25/08/2026 — demande explicite (amélioration SEO) :
-      // chaque tuile est désormais un vrai lien vers la page dédiée du
-      // bien (biens/{slug}/), générée par le serveur avec plus d'infos,
-      // plus de photos, ses propres balises title/meta et schema.org.
-      const lien = op.slug ? `biens/${op.slug}/` : "#";
-      return `
-        <a class="tuile" href="${lien}" style="text-decoration:none;color:inherit;">
-          ${op.photos && op.photos.length ? `<img class="tuile-photo" src="${op.photos[0]}" alt="Photo du bien">` : ""}
-          <div class="tuile-corps">
-            <h3>${op.titre ?? "Opération"}</h3>
-            <div class="tuile-details">${op.ville ?? ""} ${op.code_postal ?? ""}</div>
+        <aside class="colonne-contact">
+          <div class="carte-contact">
+            <h2>Une opération vous intéresse ?</h2>
+            <p>📧 fsmdb22@gmail.com</p>
+            <p>📞 07 69 31 72 09 - 06 46 63 46 41</p>
+            <a class="bouton-contact" href="mailto:fsmdb22@gmail.com?subject=Intérêt%20pour%20une%20opération%20FS MDB&body=Bonjour%2C%0A%0AJe%20suis%20intéressé(e)%20par%20l'une%20de%20vos%20opérations.%0A%0ACordialement%2C">
+              ✉️ Nous contacter
+            </a>
           </div>
-          ${op.prix_vente_affiche ? `<div class="tuile-prix">${op.prix_vente_affiche.toLocaleString("fr-FR")} €</div>` : ""}
-        </a>`;
-    }
+        </aside>
+      </div>
+    </div>
 
-    fetch("operations.json?" + Date.now())
-      .then(r => r.json())
-      .then(operations => {
-        const conteneur = document.getElementById("liste");
-        if (!operations.length) {
-          conteneur.innerHTML = '<p class="vide">Aucune opération publiée pour le moment.</p>';
-          return;
-        }
-        // MODIFIÉ le 26/08/2026 — demande explicite : "j'aimerais qu'il
-        // soit affiché les autres catégories même s'il n'y a pas de bien
-        // encore dedans" — le filtre .filter(cat => cat.operations.length
-        // > 0) masquait entièrement une catégorie vide, alors que les 4
-        // catégories (En cours / Bientôt en vente / En vente / Déjà
-        // vendu) doivent toujours apparaître dans le menu, avec un
-        // message dédié si elle est vide pour l'instant.
-        conteneur.innerHTML = CATEGORIES
-          .map(cat => ({ ...cat, operations: operations.filter(op => op.statut_public === cat.cle) }))
-          .map(cat => `
-            <section class="categorie" id="categorie-${cat.cle}">
-              <div class="titre-categorie">${cat.titre} <span class="statut ${cat.cle}">${cat.operations.length}</span></div>
-              <div class="tuiles-colonne">${cat.operations.length ? cat.operations.map(rendreTuile).join("") : '<p class="vide">Aucun bien dans cette catégorie pour le moment.</p>'}</div>
-            </section>
-          `).join("");
-      })
-      .catch(() => {
-        document.getElementById("liste").innerHTML = '<p class="vide">Impossible de charger les opérations.</p>';
-      });
-  </script>
+    <div class="avertissement-demarchage">
+      ⚠️ <strong>Nous ne travaillons avec aucune agence immobilière.</strong><br>
+      Nous vendons exclusivement de particulier à particulier. Merci de vous abstenir de tout démarchage commercial (téléphonique, mail ou courrier) pour proposer un mandat de vente sur nos biens — ces sollicitations ne seront pas suivies d'effet.
+    </div>
 
-  <div class="avertissement-demarchage">
-    ⚠️ <strong>Nous ne travaillons avec aucune agence immobilière.</strong><br>
-    Nous vendons exclusivement de particulier à particulier. Merci de vous abstenir de tout démarchage commercial (téléphonique, mail ou courrier) pour proposer un mandat de vente sur nos biens — ces sollicitations ne seront pas suivies d'effet.
+    <footer>
+      <a href="mentions-legales.html">Mentions légales</a> · <a href="confidentialite.html">Politique de confidentialité</a>
+    </footer>
   </div>
 
-  <footer>
-    <a href="mentions-legales.html">Mentions légales</a> · <a href="confidentialite.html">Politique de confidentialité</a>
-  </footer>
+  <!-- AJOUTÉ le 09/09/2026 — demande explicite : "un défilement d'image
+       en zoom plein écran", comme sur la fiche d'un bien. Même overlay,
+       même fonction nexusPhotoPleinEcran que construire_page_bien_html
+       (règle d'or n°1 : même comportement partout) — ici sur la miniature
+       de chaque tuile de l'accueil. stopPropagation() sur le clic de la
+       photo : la tuile entière est déjà un lien vers la fiche du bien,
+       cliquer la photo doit zoomer, pas naviguer.
+       MODIFIÉ le 10/09/2026 — demande explicite : "je ne veux pas avoir
+       à fermer l'image pour en ouvrir une autre, je veux que le plein
+       écran soit lié au carrousel". Même ajout que sur la fiche d'un
+       bien : flèches précédent/suivant, touches ← →, glissement
+       tactile, compteur "x / y" — operations.json contient déjà TOUTES
+       les photos de chaque bien (pas seulement la première), donc rien
+       à changer côté Python pour ça. -->
+  <div id="nexus-photo-plein-ecran" onclick="this.style.display='none';" style="display:none;position:fixed;inset:0;background:rgba(10,15,25,0.94);z-index:9999;cursor:zoom-out;align-items:center;justify-content:center;padding:24px;">
+    <img id="nexus-photo-plein-ecran-img" src="" alt="Photo en plein écran" style="max-width:96vw;max-height:92vh;object-fit:contain;border-radius:4px;">
+    <button id="nexus-photo-plein-ecran-prec" onclick="event.stopPropagation();nexusPhotoPleinEcranDeplacer(-1);" aria-label="Photo précédente" style="display:none;position:absolute;top:50%;left:18px;transform:translateY(-50%);background:rgba(255,255,255,0.12);color:#fff;border:none;width:46px;height:46px;border-radius:50%;cursor:pointer;font-size:26px;line-height:1;">‹</button>
+    <button id="nexus-photo-plein-ecran-suiv" onclick="event.stopPropagation();nexusPhotoPleinEcranDeplacer(1);" aria-label="Photo suivante" style="display:none;position:absolute;top:50%;right:18px;transform:translateY(-50%);background:rgba(255,255,255,0.12);color:#fff;border:none;width:46px;height:46px;border-radius:50%;cursor:pointer;font-size:26px;line-height:1;">›</button>
+    <div id="nexus-photo-plein-ecran-compteur" style="display:none;position:absolute;bottom:20px;left:0;right:0;text-align:center;color:#fff;font-size:13.5px;opacity:0.85;"></div>
+    <button onclick="event.stopPropagation();document.getElementById('nexus-photo-plein-ecran').style.display='none';" aria-label="Fermer" style="position:absolute;top:18px;right:24px;background:none;border:none;color:#fff;font-size:36px;cursor:pointer;line-height:1;">×</button>
+  </div>
+  <script>
+  window.nexusPhotosBien = [];
+  window.nexusPhotoPleinEcranIndex = 0;
+  function nexusPhotoPleinEcranAfficher(i) {
+    var photos = window.nexusPhotosBien;
+    if (!photos.length) return;
+    i = ((i % photos.length) + photos.length) % photos.length;
+    window.nexusPhotoPleinEcranIndex = i;
+    document.getElementById("nexus-photo-plein-ecran-img").src = photos[i];
+    var plusieurs = photos.length > 1;
+    document.getElementById("nexus-photo-plein-ecran-prec").style.display = plusieurs ? "flex" : "none";
+    document.getElementById("nexus-photo-plein-ecran-suiv").style.display = plusieurs ? "flex" : "none";
+    var compteur = document.getElementById("nexus-photo-plein-ecran-compteur");
+    compteur.style.display = plusieurs ? "block" : "none";
+    compteur.textContent = (i + 1) + " / " + photos.length;
+  }
+  // AJOUTÉ le 10/09/2026 — reçoit désormais la liste COMPLÈTE des photos
+  // du bien cliqué (pas seulement une URL) pour pouvoir naviguer dedans.
+  window.nexusPhotoPleinEcran = function (photos, index) {
+    window.nexusPhotosBien = photos;
+    nexusPhotoPleinEcranAfficher(index || 0);
+    document.getElementById("nexus-photo-plein-ecran").style.display = "flex";
+  };
+  window.nexusPhotoPleinEcranDeplacer = function (delta) {
+    nexusPhotoPleinEcranAfficher(window.nexusPhotoPleinEcranIndex + delta);
+  };
+  document.addEventListener("keydown", function (e) {
+    var o = document.getElementById("nexus-photo-plein-ecran");
+    if (!o || o.style.display === "none") return;
+    if (e.key === "Escape") { o.style.display = "none"; }
+    else if (e.key === "ArrowRight") { nexusPhotoPleinEcranDeplacer(1); }
+    else if (e.key === "ArrowLeft") { nexusPhotoPleinEcranDeplacer(-1); }
+  });
+  (function () {
+    var overlay = document.getElementById("nexus-photo-plein-ecran");
+    var xDepart = null;
+    overlay.addEventListener("touchstart", function (e) { xDepart = e.touches[0].clientX; }, { passive: true });
+    overlay.addEventListener("touchend", function (e) {
+      if (xDepart === null) return;
+      var delta = e.changedTouches[0].clientX - xDepart;
+      if (Math.abs(delta) > 40) { nexusPhotoPleinEcranDeplacer(delta > 0 ? -1 : 1); }
+      xDepart = null;
+    }, { passive: true });
+  })();
+
+  // Classement chronologique par catégorie, dans cet ordre précis
+  // (demande explicite) — même principe que les colonnes Acquisition /
+  // Travaux / Commercialisation / Terminées de NEXUS·IA.
+  const CATEGORIES = [
+    { cle: "en_acquisition", titre: "En cours" },
+    { cle: "en_travaux", titre: "Bientôt en vente" },
+    { cle: "en_vente", titre: "En vente" },
+    { cle: "vendu", titre: "Déjà vendu" },
+  ];
+
+  // AJOUTÉ le 10/09/2026 — VRAI RISQUE DE SÉCURITÉ TROUVÉ ET CONFIRMÉ,
+  // lors d'un audit demandé explicitement (même faille que côté Python,
+  // voir construire_page_bien_html) : op.titre/op.ville/op.code_postal
+  // sont insérés tels quels dans innerHTML — un titre de bien contenant
+  // "<script>" ou une balise HTML (extrait par IA depuis un mail de
+  // prospection, donc potentiellement influencé par l'expéditeur, pas
+  // seulement saisi par l'utilisateur) s'exécuterait dans le navigateur
+  // de n'importe quel visiteur du site public. Échappe les caractères
+  // HTML spéciaux avant toute insertion — jamais utilisé pour des
+  // attributs déjà protégés autrement (lien/onclick, qui utilisent déjà
+  // JSON.stringify + &quot;, voir plus bas).
+  function echapperHtml(texte) {
+    const div = document.createElement("div");
+    div.textContent = texte ?? "";
+    return div.innerHTML;
+  }
+
+  function rendreTuile(op) {
+    // MODIFIÉ le 25/08/2026 — demande explicite (amélioration SEO) :
+    // chaque tuile est désormais un vrai lien vers la page dédiée du
+    // bien (biens/{slug}/), générée par le serveur avec plus d'infos,
+    // plus de photos, ses propres balises title/meta et schema.org.
+    const lien = op.slug ? `biens/${op.slug}/` : "#";
+    // AJOUTÉ le 09/09/2026 — clic sur la miniature = zoom plein écran
+    // (stopPropagation pour ne pas déclencher aussi le lien de la tuile).
+    // MODIFIÉ le 10/09/2026 — passe désormais toutes les photos du bien
+    // plutôt que la seule première, pour permettre la navigation en
+    // plein écran. &quot; (pas des guillemets doubles bruts) car ce
+    // JSON est injecté À L'INTÉRIEUR d'un attribut onclick="..." déjà
+    // délimité par des guillemets doubles — le navigateur décode
+    // &quot; en " avant d'exécuter le JS, sans jamais casser l'attribut.
+    const photosPourJs = JSON.stringify(op.photos || []).replace(/"/g, "&quot;");
+    const photo = op.photos && op.photos.length
+      ? `<img class="tuile-photo" src="${op.photos[0]}" alt="Photo du bien" onclick="event.preventDefault();event.stopPropagation();nexusPhotoPleinEcran(${photosPourJs}, 0);">`
+      : "";
+    return `
+      <a class="tuile" href="${lien}" style="text-decoration:none;color:inherit;">
+        ${photo}
+        <div class="tuile-corps">
+          <h3>${echapperHtml(op.titre) || "Opération"}</h3>
+          <div class="tuile-details">${echapperHtml(op.ville)} ${echapperHtml(op.code_postal)}</div>
+        </div>
+        ${op.prix_vente_affiche ? `<div class="tuile-prix">${op.prix_vente_affiche.toLocaleString("fr-FR")} €</div>` : ""}
+      </a>`;
+  }
+
+  // AJOUTÉ le 09/09/2026 — construit le menu latéral avec les mêmes
+  // données que la liste principale (un lien direct par bien, regroupé
+  // par catégorie) — identique en tous points au menu affiché sur la
+  // fiche de chaque bien (voir construire_page_bien_html côté Python),
+  // simplement construit ici en JavaScript puisque l'accueil charge ses
+  // données depuis operations.json plutôt que d'être généré par Python.
+  function rendreMenuLateral(operations) {
+    const blocs = CATEGORIES.map(cat => {
+      const biensCategorie = operations.filter(op => op.statut_public === cat.cle && op.slug);
+      const liens = biensCategorie.length
+        ? biensCategorie.map(op => `<li><a class="menu-item" href="biens/${op.slug}/">${echapperHtml(op.titre) || "Opération"}</a></li>`).join("")
+        : '<li class="menu-item-vide">Aucun bien pour l\'instant</li>';
+      return `<div class="sidebar__label">${cat.titre} (${biensCategorie.length})</div><ul class="menu-list">${liens}</ul>`;
+    }).join("");
+    document.getElementById("menu-sidebar").innerHTML =
+      `<div class="sidebar__brand">FS MDB</div>${blocs}`;
+  }
+
+  fetch("operations.json?" + Date.now())
+    .then(r => r.json())
+    .then(operations => {
+      rendreMenuLateral(operations);
+      const conteneur = document.getElementById("liste");
+      if (!operations.length) {
+        conteneur.innerHTML = '<p class="vide">Aucune opération publiée pour le moment.</p>';
+        return;
+      }
+      // MODIFIÉ le 26/08/2026 — demande explicite : "j'aimerais qu'il
+      // soit affiché les autres catégories même s'il n'y a pas de bien
+      // encore dedans" — le filtre .filter(cat => cat.operations.length
+      // > 0) masquait entièrement une catégorie vide, alors que les 4
+      // catégories (En cours / Bientôt en vente / En vente / Déjà
+      // vendu) doivent toujours apparaître dans le menu, avec un
+      // message dédié si elle est vide pour l'instant.
+      conteneur.innerHTML = CATEGORIES
+        .map(cat => ({ ...cat, operations: operations.filter(op => op.statut_public === cat.cle) }))
+        .map(cat => `
+          <section class="categorie" id="categorie-${cat.cle}">
+            <div class="titre-categorie">${cat.titre} <span class="statut ${cat.cle}">${cat.operations.length}</span></div>
+            <div class="tuiles-colonne">${cat.operations.length ? cat.operations.map(rendreTuile).join("") : '<p class="vide">Aucun bien dans cette catégorie pour le moment.</p>'}</div>
+          </section>
+        `).join("");
+    })
+    .catch(() => {
+      document.getElementById("liste").innerHTML = '<p class="vide">Impossible de charger les opérations.</p>';
+      document.getElementById("menu-sidebar").innerHTML = `<div class="sidebar__brand">FS MDB</div>`;
+    });
+  </script>
 </body>
 </html>
