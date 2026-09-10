@@ -90,6 +90,18 @@
     .sidebar__brand { font-family: var(--font-display); font-size: 20px; font-weight: 600; margin-bottom: 20px; padding: 0 12px; }
     .sidebar__label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--nexus-text-on-navy-soft); padding: 0 12px; margin: 18px 0 8px; }
     .sidebar__label:first-of-type { margin-top: 0; }
+    /* AJOUTÉ le 10/09/2026 — demande explicite : "en couleur que l'on
+       puisse différencier les opérations" — les 4 catégories du menu
+       latéral étaient toutes dans le même gris pâle, illisible pour les
+       distinguer d'un coup d'œil. Couleurs éclaircies (pas les mêmes
+       teintes que .statut.* ci-dessus, pensées pour un fond blanc —
+       ici sur fond marine foncé, il faut des teintes plus vives pour
+       rester lisibles) ; "Déjà vendu" reprend l'or NEXUS demandé
+       explicitement ("une couleur dorée comme Nexus"). */
+    .sidebar__label--en_acquisition { color: #8fb4f5; }
+    .sidebar__label--en_travaux { color: #f0b86b; }
+    .sidebar__label--en_vente { color: #7fdba8; }
+    .sidebar__label--vendu { color: var(--nexus-gold); }
     ul.menu-list { list-style: none; margin: 0; padding: 0; }
     .menu-item { display: block; padding: 9px 12px; border-radius: 8px; color: var(--nexus-text-on-navy-soft); font-size: 13.8px; font-weight: 500; text-decoration: none; }
     .menu-item:hover { background: rgba(255,255,255,0.08); color: #fff; }
@@ -176,7 +188,7 @@
 
     <div class="avertissement-demarchage">
       ⚠️ <strong>Nous ne travaillons avec aucune agence immobilière.</strong><br>
-      Nous vendons exclusivement de particulier à particulier. Merci de vous abstenir de tout démarchage commercial (téléphonique, mail ou courrier) pour proposer un mandat de vente sur nos biens — ces sollicitations ne seront pas suivies d'effet.
+      En tant que professionnels, nous vendons directement nos biens aux particuliers. Merci de vous abstenir de tout démarchage commercial (téléphonique, mail ou courrier) pour proposer un mandat de vente sur nos biens — ces sollicitations ne seront pas suivies d'effet.
     </div>
 
     <footer>
@@ -318,7 +330,7 @@
       const liens = biensCategorie.length
         ? biensCategorie.map(op => `<li><a class="menu-item" href="biens/${op.slug}/">${echapperHtml(op.titre) || "Opération"}</a></li>`).join("")
         : '<li class="menu-item-vide">Aucun bien pour l\'instant</li>';
-      return `<div class="sidebar__label">${cat.titre} (${biensCategorie.length})</div><ul class="menu-list">${liens}</ul>`;
+      return `<div class="sidebar__label sidebar__label--${cat.cle}">${cat.titre} (${biensCategorie.length})</div><ul class="menu-list">${liens}</ul>`;
     }).join("");
     document.getElementById("menu-sidebar").innerHTML =
       `<div class="sidebar__brand">FS MDB</div>${blocs}`;
