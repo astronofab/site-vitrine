@@ -89,7 +89,11 @@
        aussi simple). Toute page du site a maintenant EXACTEMENT le même
        menu, qu'on arrive par l'accueil ou par la fiche d'un bien. */
     .sidebar { width: 280px; flex-shrink: 0; background: var(--nexus-navy-950); color: var(--nexus-text-on-navy); padding: 24px 14px; position: fixed; top: 0; bottom: 0; left: 0; overflow-y: auto; z-index: 10; }
-    .sidebar__brand { font-family: var(--font-display); font-size: 20px; font-weight: 600; margin-bottom: 20px; padding: 0 12px; }
+    /* MODIFIÉ le 29/10/2026 (V285) — demande explicite : « je veux le menu de gauche tout le temps pareil partout […] qu'il ait les mêmes tuiles que sur la page de garde, et qu'on puisse revenir sur les opérations ».
+       Même en-tête que la page d'un bien (construire_page_bien_html) : nom, puis « ← Toutes les opérations ». */
+    .sidebar__brand { font-family: var(--font-display); font-size: 20px; font-weight: 600; margin-bottom: 4px; padding: 0 12px; }
+    .sidebar__retour { display: block; color: var(--nexus-text-on-navy-soft); font-size: 12.5px; padding: 0 12px; margin-bottom: 20px; text-decoration: none; }
+    .sidebar__retour:hover { color: #fff; }
     .sidebar__label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--nexus-text-on-navy-soft); padding: 0 12px; margin: 18px 0 8px; }
     .sidebar__label:first-of-type { margin-top: 0; }
     /* AJOUTÉ le 10/09/2026 — demande explicite : "en couleur que l'on
@@ -177,7 +181,7 @@
        et même regroupement par catégorie que la liste principale,
        même lien "biens/{slug}/" que le menu de la fiche d'un bien. -->
   <aside class="sidebar" id="menu-sidebar">
-    <div class="sidebar__brand">FS MDB</div>
+    <div class="sidebar__brand">FS MDB</div><a class="sidebar__retour" href="/index.html">← Toutes les opérations</a>
     <p class="vide" style="padding:0 12px;font-size:12px;">Chargement…</p>
   </aside>
 
@@ -364,7 +368,7 @@
       return `<div class="sidebar__label sidebar__label--${cat.cle}">${cat.titre} (${biensCategorie.length})</div><ul class="menu-list">${liens}</ul>`;
     }).join("");
     document.getElementById("menu-sidebar").innerHTML =
-      `<div class="sidebar__brand">FS MDB</div>${blocs}`;
+      `<div class="sidebar__brand">FS MDB</div><a class="sidebar__retour" href="/index.html">← Toutes les opérations</a>${blocs}`;
   }
 
   fetch("operations.json?" + Date.now())
@@ -394,7 +398,7 @@
     })
     .catch(() => {
       document.getElementById("liste").innerHTML = '<p class="vide">Impossible de charger les opérations.</p>';
-      document.getElementById("menu-sidebar").innerHTML = `<div class="sidebar__brand">FS MDB</div>`;
+      document.getElementById("menu-sidebar").innerHTML = `<div class="sidebar__brand">FS MDB</div><a class="sidebar__retour" href="/index.html">← Toutes les opérations</a>`;
     });
   </script>
 </body>

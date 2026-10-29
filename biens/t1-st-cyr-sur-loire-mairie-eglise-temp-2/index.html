@@ -20,7 +20,7 @@
     * { box-sizing: border-box; }
     body { font-family: var(--font-body); margin: 0; color: var(--nexus-text); background: var(--nexus-bg); }
     h1, h2 { font-family: var(--font-display); }
-    .sidebar { width: 258px; flex-shrink: 0; background: var(--nexus-navy-950); color: var(--nexus-text-on-navy); padding: 24px 14px; position: fixed; top: 0; bottom: 0; left: 0; overflow-y: auto; }
+    .sidebar { width: 280px; flex-shrink: 0; background: var(--nexus-navy-950); color: var(--nexus-text-on-navy); padding: 24px 14px; position: fixed; top: 0; bottom: 0; left: 0; overflow-y: auto; }
     .sidebar__brand { font-family: var(--font-display); font-size: 20px; font-weight: 600; margin-bottom: 4px; padding: 0 12px; }
     .sidebar__brand span { color: var(--nexus-gold); }
     .sidebar__retour { display: block; color: var(--nexus-text-on-navy-soft); font-size: 12.5px; padding: 0 12px; margin-bottom: 20px; text-decoration: none; }
@@ -40,8 +40,30 @@
     .menu-item:hover { background: rgba(255,255,255,0.08); color: #fff; }
     .menu-item__label { flex: 1; }
     .menu-item__badge { background: rgba(255,255,255,0.12); border-radius: 10px; padding: 1px 8px; font-size: 11.5px; }
-    .contenu { margin-left: 258px; padding: 40px 32px; max-width: 760px; }
-    @media (max-width: 760px) { .sidebar { position: static; width: auto; } .contenu { margin-left: 0; } }
+
+    /* AJOUTÉ le 28/10/2026 (V284) — demande explicite : « sur le site vitrine, en mode téléphone, le menu […] qui se retrouve en haut de la page soit caché […] et sur l'ordinateur un petit cadre façon tuile pour chaque opération […] afin que le menu de gauche soit plus stylé, designé et visuellement agréable ».
+       Chaque bien du menu devient une petite tuile : miniature, titre sur deux lignes, ville et prix ; liseré de la
+       couleur de sa catégorie. Sur téléphone le menu est masqué : chaque tuile de la page est déjà un lien, et le
+       retour arrière ramène à l'accueil. */
+    .menu-tuile { display: flex; align-items: center; gap: 10px; padding: 8px; margin: 0 2px 8px; border-radius: 10px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.07); border-left: 3px solid var(--couleur-categorie, rgba(255,255,255,0.3)); color: #fff; text-decoration: none; transition: background 0.15s ease, transform 0.15s ease; }
+    .menu-tuile:hover { background: rgba(255,255,255,0.11); transform: translateX(2px); }
+    .menu-tuile--actif { background: rgba(201,162,39,0.18); border-color: rgba(201,162,39,0.55); border-left-color: var(--nexus-gold); }
+    .menu-tuile--en_acquisition { --couleur-categorie: #8fb4f5; }
+    .menu-tuile--en_travaux { --couleur-categorie: #f0b86b; }
+    .menu-tuile--en_vente { --couleur-categorie: #7fdba8; }
+    .menu-tuile--vendu { --couleur-categorie: var(--nexus-gold); }
+    .menu-tuile__photo { width: 54px; height: 44px; flex-shrink: 0; border-radius: 7px; object-fit: cover; background: rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; font-size: 18px; }
+    .menu-tuile__texte { min-width: 0; display: flex; flex-direction: column; }
+    .menu-tuile__titre { font-size: 12.8px; font-weight: 600; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .menu-tuile__info { font-size: 11.5px; color: var(--nexus-text-on-navy-soft); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    /* MODIFIÉ le 28/10/2026 (V284) — demande explicite : « que la page soit élargie dans la largeur, horizontale, afin qu'elle ne soit pas en mode colonne, et que l'on puisse voir mieux les photos et le texte ».
+       Page élargie (1 500 px au lieu de 760) : photos en grand, puis caractéristiques et texte en dessous, sur toute
+       la largeur. */
+    /* MODIFIÉ le 29/10/2026 (V285) — demande explicite : « si on clique sur une tuile, je la veux en plein écran, l'affiche de l'annonce » : plus de largeur maximale, la page occupe tout
+       l'écran à droite du menu (photos jusqu'à 85 % de la hauteur de la fenêtre). */
+    .contenu { margin-left: 280px; padding: 36px 48px; }
+    .contenu p { font-size: 15px; line-height: 1.7; }
+    @media (max-width: 760px) { .sidebar { display: none; } .contenu { margin-left: 0; padding: 24px 16px; } }
     .fil-ariane { font-size: 12.5px; color: var(--nexus-text-soft); margin-bottom: 16px; }
     .fil-ariane a { color: var(--nexus-text-soft); }
     h1.titre-bien { font-size: 28px; font-weight: 600; margin: 0 0 6px; }
@@ -65,7 +87,7 @@
        affiche toujours la photo ENTIÈRE, quitte à laisser une bande vide
        de part et d'autre (comblée par le fond gris clair du carrousel,
        déjà utilisé juste au-dessus) — jamais plus rien de coupé. */
-    .galerie-photo { flex: 0 0 100%; width: 100%; height: 360px; object-fit: contain; background: #eceef3; scroll-snap-align: start; }
+    .galerie-photo { flex: 0 0 100%; width: 100%; height: clamp(320px, 85vh, 1100px); object-fit: contain; background: #eceef3; scroll-snap-align: start; }
     .galerie-bouton { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(15,26,48,0.55); color: #fff; border: none; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; font-size: 20px; line-height: 1; display: flex; align-items: center; justify-content: center; }
     .galerie-bouton:hover { background: rgba(15,26,48,0.8); }
     .galerie-bouton--prec { left: 12px; }
@@ -88,11 +110,11 @@
   <aside class="sidebar">
     <div class="sidebar__brand">FS MDB</div>
     <a class="sidebar__retour" href="../../index.html">← Toutes les opérations</a>
-    <div class="sidebar__label sidebar__label--en_acquisition">En cours (2)</div><ul class="menu-list"><li><a class="menu-item menu-item--actif" href="../t1-st-cyr-sur-loire-mairie-eglise-temp-2/"><span class="menu-item__label">T1 · 26 m² · Rue de la Petite Péraudière · Mairie- église</span></a></li>
-<li><a class="menu-item" href="../t2-st-cyr-sur-loire-mairie-eglise-temp-3/"><span class="menu-item__label">T2 · 29 m² · Rue de la Petite Péraudière · Mairie- église</span></a></li></ul>
+    <div class="sidebar__label sidebar__label--en_acquisition">En cours (2)</div><ul class="menu-list"><li><a class="menu-tuile menu-tuile--en_acquisition menu-tuile--actif" href="../t1-st-cyr-sur-loire-mairie-eglise-temp-2/"><img class="menu-tuile__photo" src="https://fsmdb.fr/biens/t1-st-cyr-sur-loire-mairie-eglise-temp-2/photos/1.jpg?v=8cbce80c4f" alt="" loading="lazy"><span class="menu-tuile__texte"><span class="menu-tuile__titre">T1 · 26 m² · Rue de la Petite Péraudière · Mairie- église</span><span class="menu-tuile__info">St Cyr sur loire</span></span></a></li>
+<li><a class="menu-tuile menu-tuile--en_acquisition" href="../t2-st-cyr-sur-loire-mairie-eglise-temp-3/"><img class="menu-tuile__photo" src="https://fsmdb.fr/biens/t2-st-cyr-sur-loire-mairie-eglise-temp-3/photos/1.jpg?v=a87f812ef9" alt="" loading="lazy"><span class="menu-tuile__texte"><span class="menu-tuile__titre">T2 · 29 m² · Rue de la Petite Péraudière · Mairie- église</span><span class="menu-tuile__info">St Cyr sur loire</span></span></a></li></ul>
 <div class="sidebar__label sidebar__label--en_travaux">Bientôt en vente (0)</div><ul class="menu-list"><li class="menu-item-vide" style="padding:6px 12px;font-size:12px;color:var(--nexus-text-on-navy-soft);opacity:0.7;">Aucun bien pour l'instant</li></ul>
-<div class="sidebar__label sidebar__label--en_vente">En vente (1)</div><ul class="menu-list"><li><a class="menu-item" href="../t2-tours-nex-2026-0002/"><span class="menu-item__label">T2 · 34 m² · rue de l&#x27;Ermitage</span></a></li></ul>
-<div class="sidebar__label sidebar__label--vendu">Déjà vendu (1)</div><ul class="menu-list"><li><a class="menu-item" href="../t3-tours-nex-2026-0001/"><span class="menu-item__label">T3 · 59 m² · avenue André Maginot</span></a></li></ul>
+<div class="sidebar__label sidebar__label--en_vente">En vente (1)</div><ul class="menu-list"><li><a class="menu-tuile menu-tuile--en_vente" href="../t2-tours-nex-2026-0002/"><img class="menu-tuile__photo" src="https://fsmdb.fr/biens/t2-tours-nex-2026-0002/photos/1.jpg?v=caba48ceb7" alt="" loading="lazy"><span class="menu-tuile__texte"><span class="menu-tuile__titre">T2 · 34 m² · rue de l&#x27;Ermitage</span><span class="menu-tuile__info">Tours · 132 000 €</span></span></a></li></ul>
+<div class="sidebar__label sidebar__label--vendu">Déjà vendu (1)</div><ul class="menu-list"><li><a class="menu-tuile menu-tuile--vendu" href="../t3-tours-nex-2026-0001/"><img class="menu-tuile__photo" src="https://fsmdb.fr/biens/t3-tours-nex-2026-0001/photos/1.jpg?v=a6d615b627" alt="" loading="lazy"><span class="menu-tuile__texte"><span class="menu-tuile__titre">T3 · 59 m² · avenue André Maginot</span><span class="menu-tuile__info">Tours · 129 000 €</span></span></a></li></ul>
   </aside>
   <div class="contenu">
     <p class="fil-ariane"><a href="../../index.html">Accueil</a> › T1 · 26 m² · Rue de la Petite Péraudière · Mairie- église</p>
