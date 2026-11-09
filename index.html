@@ -181,7 +181,7 @@
        et même regroupement par catégorie que la liste principale,
        même lien "biens/{slug}/" que le menu de la fiche d'un bien. -->
   <aside class="sidebar" id="menu-sidebar">
-    <div class="sidebar__brand">FS MDB</div><a class="sidebar__retour" href="/index.html">← Toutes les opérations</a>
+    <div class="sidebar__brand">FS MDB</div><a class="sidebar__retour" href="/">← Toutes les opérations</a>
     <p class="vide" style="padding:0 12px;font-size:12px;">Chargement…</p>
   </aside>
 
@@ -218,7 +218,7 @@
     </div>
 
     <footer>
-      <a href="mentions-legales.html">Mentions légales</a> · <a href="confidentialite.html">Politique de confidentialité</a>
+      <a href="/mentions-legales">Mentions légales</a> · <a href="/confidentialite">Politique de confidentialité</a>
     </footer>
   </div>
 
@@ -368,7 +368,7 @@
       return `<div class="sidebar__label sidebar__label--${cat.cle}">${cat.titre} (${biensCategorie.length})</div><ul class="menu-list">${liens}</ul>`;
     }).join("");
     document.getElementById("menu-sidebar").innerHTML =
-      `<div class="sidebar__brand">FS MDB</div><a class="sidebar__retour" href="/index.html">← Toutes les opérations</a>${blocs}`;
+      `<div class="sidebar__brand">FS MDB</div><a class="sidebar__retour" href="/">← Toutes les opérations</a>${blocs}`;
   }
 
   fetch("operations.json?" + Date.now())
@@ -398,7 +398,7 @@
     })
     .catch(() => {
       document.getElementById("liste").innerHTML = '<p class="vide">Impossible de charger les opérations.</p>';
-      document.getElementById("menu-sidebar").innerHTML = `<div class="sidebar__brand">FS MDB</div><a class="sidebar__retour" href="/index.html">← Toutes les opérations</a>`;
+      document.getElementById("menu-sidebar").innerHTML = `<div class="sidebar__brand">FS MDB</div><a class="sidebar__retour" href="/">← Toutes les opérations</a>`;
     });
   </script>
 </body>
